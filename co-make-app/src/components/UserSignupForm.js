@@ -1,30 +1,87 @@
 // create a user sign up form
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import * as yup from 'yup';
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
+import schema from '../validation/schema';
 
-export default function UserSignupForm(props) {
-      const { push } = useHistory();
-    const {
-        values,
-        submit, 
-        change, 
-        disabled, 
-        errors,
-    } = props
+const initialValues = {
+    username: '',
+    password: '',
+    confirmPassword: '',
+    role: '',
+  };
+  
+  const initialErrors = {
+    username: '',
+    password: '',
+    confirmPassword: '',
+    role: '',
+  };
+  
+  const initialDisabled = true;
+  
+
+export default function UserSignupForm() {
+    const [users, setUsers] = useState([]);
+    const [formValues, setFormValues] = useState(initialValues);
+    const [formErrors, setFormErrors] = useState(initialErrors);
+    const [disabled, setDisabled] = useState(initialDisabled);
+    const { push } = useHistory();
+
+  const change = (name, value) => {
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => {
+        setFormErrors({
+          ...formErrors, 
+          [name]: ''
+        });
+      })
+      .catch(err => {
+        setFormErrors({
+          ...formErrors,
+          [name]: err.errors[0]
+        });
+      });
+    
+      setFormValues({
+        ...formValues,
+        [name]: value
+      })
+  }
+
+  const submit = () => {
+    const newUser = {
+      username: formValues.username.trim(),
+      password: formValues.password.trim(),
+    };
+    // axios req posting form values to dummy api
+     axios.post('https://comake-tt-webft-20.herokuapp.com/api/auth/register', newUser)
+     .then(res => {
+         console.log(res)
+         setUsers([ ...users, newUser]);
+         push('/login')
+    //    localStorage.setItem('token', res.data.payload)
+     })
+     .catch(err => {
+       console.log('user signup error: ', err.message)
+       console.log(newUser)
+     })
+    
+    setFormValues(initialValues);
+  };
+
+  useEffect(() => {
+    schema.isValid(formValues).then(valid => {
+      setDisabled(!valid);
+    });
+  }, [formValues])
 
     const onSubmit = event => {
         event.preventDefault()
         submit()
-        // axios req posting form values to dummy api
-        axios.post('https://reqres.in/api/users', values)
-        .then(res => {
-          localStorage.setItem('token', res.data.payload)
-          push('/issues')
-        })
-        .catch(err => {
-          console.log('user signup error: ', err)
-        })
     };
 
     const onChange = event => {
@@ -43,31 +100,31 @@ export default function UserSignupForm(props) {
                     <input
                         type='text'
                         name='username'
-                        value={values.username}
+                        value={formValues.username}
                         onChange={onChange}
                         placeholder='Username'
                     />
-                    <div>{errors.username}</div>
+                    <div>{formErrors.username}</div>
                 </div>
                 <div>
                     <input
                         type='password'
                         name='password'
-                        value={values.password}
+                        value={formValues.password}
                         onChange={onChange}
                         placeholder='Password'
                     />
-                    <div>{errors.password}</div>
+                    <div>{formErrors.password}</div>
                 </div>
                 <div>
                     <input
                         type='password'
                         name='confirmPassword'
-                        value={values.confirmPassword}
+                        value={formValues.confirmPassword}
                         onChange={onChange}
                         placeholder='Confirm Password'
                     />
-                    <div>{errors.confirmPassword}</div>
+                    <div>{formErrors.confirmPassword}</div>
                 </div>
             </div>
             <div>
@@ -75,7 +132,7 @@ export default function UserSignupForm(props) {
                 <div>
                     <select
                         name='role'
-                        value={values.role}
+                        value={formValues.role}
                         onChange={onChange}
                     >
                         <option value=''>-- Select --</option>
