@@ -1,3 +1,5 @@
+// (mostly) imported from build week marketing page
+// feel free to make changes to this
 const Home = () => {
     return (
 			<div id="wrapper">
