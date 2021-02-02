@@ -1,34 +1,76 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import * as yup from "yup";
 
 import axios from "axios";
+import schemaLogin from "../validation/schemaLogin";
+
+// const { push } = useHistory();
+
+const initialValues = {
+  username: "",
+  password: "",
+};
+
+const initialErrors = {
+  username: "",
+  password: "",
+};
+
+const initialDisabled = true;
 
 export default function UserLogin(props) {
-  const { values, submit, change, disabled, errors } = props;
+  const [users, setUsers] = useState([]);
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState(initialErrors);
+  const [disabled, setDisabled] = useState(initialDisabled);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    submit();
-    // axios
-    //   .get("https://reqres.in/api/users")
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+  const onSubmit = (event) => {
+    event.preventDefault();
+    const newUser = {
+      username: formValues.username.trim(),
+      password: formValues.password.trim(),
+      role: formValues.role,
+    };
+    setUsers([...users, newUser]);
+    setFormValues(initialValues);
   };
 
   const onChange = (evt) => {
     const { name, value } = evt.target;
-    change(name, value);
+    yup
+      .reach(schemaLogin, name)
+      .validate(value)
+      .then(() => {
+        setFormErrors({
+          ...formErrors,
+          [name]: "",
+        });
+      })
+      .catch((err) => {
+        setFormErrors({
+          ...formErrors,
+          [name]: err.errors[0],
+        });
+      });
+
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
   };
+
+  useEffect(() => {
+    schemaLogin.isValid(formValues).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [formValues]);
 
   return (
     <StyledForm>
       <div className="errors" style={{ color: "orangered" }}>
-        <div>{errors.username}</div>
-        <div>{errors.password}</div>
+        <div>{formErrors.username}</div>
+        <div>{formErrors.password}</div>
       </div>
       <h2>User Login</h2>
       <form onSubmit={onSubmit}>
@@ -37,7 +79,7 @@ export default function UserLogin(props) {
           <input
             name="username"
             type="text"
-            value={values.username}
+            value={formValues.username}
             onChange={onChange}
           />
         </label>
@@ -46,7 +88,7 @@ export default function UserLogin(props) {
           <input
             name="password"
             type="password"
-            value={values.password}
+            value={formValues.password}
             onChange={onChange}
           />
         </label>

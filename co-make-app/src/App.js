@@ -92,6 +92,7 @@ function App(props) {
             submit={submit}
             errors={formErrors}
             disabled={disabled}
+            setDisabled={setDisabled}
           />
         </Route>
         <Route exact path="/" component={Home} />
