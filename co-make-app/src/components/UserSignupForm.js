@@ -66,7 +66,7 @@ export default function UserSignupForm(props) {
                         value={values.role}
                         onChange={onChange}
                     >
-                        <option value=''>-- Select --</option>
+                        <option value=''>--------- Select ---------</option>
                         <option value='user'>Private Citizen</option>
                         <option value='official'> Government Official</option>
                     </select>
