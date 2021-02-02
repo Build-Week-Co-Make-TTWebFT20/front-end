@@ -6,6 +6,7 @@ import './index.css';
 
 import PrivateRoute from './components/PrivateRoute';
 import UserSignupForm from './components/UserSignupForm';
+import Dashboard from './components/Dashboard';
 
 
 const initialValues = {
@@ -83,9 +84,10 @@ function App(props) {
           disabled={disabled} 
          />
         </Route>
-        <Route exact path='/'/>
+        {/* link the login component here */}
+        <Route exact path='/' />
         {/* link the issues landing page here */}
-        <PrivateRoute exact path='/issues'/>
+        <PrivateRoute exact path='/issues' component={Dashboard} />
       </Router>
     </div>
   );
