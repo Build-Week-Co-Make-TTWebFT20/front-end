@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './index.css';
 import PrivateRoute from './components/PrivateRoute';
+import Dashboard from './components/Dashboard';
 import * as yup from 'yup';
 
 const initialValues = {
@@ -69,7 +70,6 @@ function App(props) {
   return (
     <div className="App">
       <Router>
-        {/* link the login component here */}
         <Route exact path='signup-user'>
          <UserSignupForm
           values={formValues}
@@ -79,9 +79,10 @@ function App(props) {
           disabled={disabled} 
          />
         </Route>
-        <Route exact path='/'/>
+        {/* link the login component here */}
+        <Route exact path='/' />
         {/* link the issues landing page here */}
-        <PrivateRoute exact path='/issues'/>
+        <PrivateRoute exact path='/issues' component={Dashboard} />
       </Router>
       <h1>HEY HEY HAY</h1>
     </div>
