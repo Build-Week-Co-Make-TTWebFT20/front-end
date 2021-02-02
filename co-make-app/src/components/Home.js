@@ -13,15 +13,15 @@ const Home = () => {
 
 
 
-				<nav id="menu">
+				<nav id="menu" className='menu'>
 					<ul className="links">
 						<li><a href="/">Home</a></li>
 						<li><a href="/signup-user">Sign Up</a></li>
 						<li><a href="/login">Login</a></li>
-						<li><a href="/issues">Issues</a></li>
+						<li><a href="/posts">Posts</a></li>
 					</ul>
 					<ul className="actions stacked">
-						<li><a href="/issues" className="button primary fit">Get Started</a></li>
+						<li><a href="/signup-user" className="button primary fit">Get Started</a></li>
 						<li><a href="/login" className="button fit">Log In</a></li>
 					</ul>
 				</nav>
