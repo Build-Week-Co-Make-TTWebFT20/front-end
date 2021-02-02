@@ -18,7 +18,7 @@ function AddIssue() {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = () => {
         e.preventDefault();
     }
 
@@ -30,6 +30,7 @@ function AddIssue() {
                 name='name'
                 onChange={handleChanges}
                 value={formValues.name}
+                required
             />
             <label htmlFor="description">Description</label>
             <input
@@ -37,6 +38,7 @@ function AddIssue() {
                 name='description'
                 onChange={handleChanges}
                 value={formValues.description}
+                required
             />
             <label htmlFor="city">City</label>
             <input
@@ -44,6 +46,7 @@ function AddIssue() {
                 name='city'
                 onChange={handleChanges}
                 value={formValues.city}
+                required
             />
             <label htmlFor="state">State</label>
             <input
@@ -51,6 +54,7 @@ function AddIssue() {
                 name='state'
                 onChange={handleChanges}
                 value={formValues.state}
+                required
             />
             <label htmlFor="zip">Zip</label>
             <input
@@ -58,6 +62,7 @@ function AddIssue() {
                 name='zip'
                 onChange={handleChanges}
                 value={formValues.zip}
+                required
             />
             <button>Add Issue</button>
         </form>
@@ -65,3 +70,4 @@ function AddIssue() {
 }
 
 export default AddIssue;
+
