@@ -1,7 +1,10 @@
 // create a user sign up form
 import React from 'react';
+import axios from "axios";
+import { useHistory } from 'react-router-dom';
 
 export default function UserSignupForm(props) {
+      const { push } = useHistory();
     const {
         values,
         submit, 
@@ -13,6 +16,15 @@ export default function UserSignupForm(props) {
     const onSubmit = event => {
         event.preventDefault()
         submit()
+        // axios req posting form values to dummy api
+        axios.post('https://reqres.in/api/users', values)
+        .then(res => {
+          localStorage.setItem('token', res.data.payload)
+          console.log(values)
+        })
+        .catch(err => {
+          console.log('user signup error: ', err)
+        })
     };
 
     const onChange = event => {
@@ -23,7 +35,7 @@ export default function UserSignupForm(props) {
     return (
         <form onSubmit={onSubmit}>
             <div>
-                <h2>Get started with yout account</h2>
+                <h2>Get started with your account</h2>
             </div>
             <div>
                 <h4>Your Information</h4>

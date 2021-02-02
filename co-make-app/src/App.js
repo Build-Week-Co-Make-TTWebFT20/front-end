@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import './index.css';
-import PrivateRoute from './components/PrivateRoute';
 import * as yup from 'yup';
+import schema from './validation/schema';
+import './index.css';
+
+import PrivateRoute from './components/PrivateRoute';
+import UserSignupForm from './components/UserSignupForm';
+
 
 const initialValues = {
   username: '',
@@ -70,7 +74,7 @@ function App(props) {
     <div className="App">
       <Router>
         {/* link the login component here */}
-        <Route exact path='signup-user'>
+        <Route path='/signup-user'>
          <UserSignupForm
           values={formValues}
           change={change}
@@ -83,7 +87,6 @@ function App(props) {
         {/* link the issues landing page here */}
         <PrivateRoute exact path='/issues'/>
       </Router>
-      <h1>HEY HEY HAY</h1>
     </div>
   );
 }
