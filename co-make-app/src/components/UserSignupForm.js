@@ -20,7 +20,7 @@ export default function UserSignupForm(props) {
         axios.post('https://reqres.in/api/users', values)
         .then(res => {
           localStorage.setItem('token', res.data.payload)
-          console.log(values)
+          push('/issues')
         })
         .catch(err => {
           console.log('user signup error: ', err)
