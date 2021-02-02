@@ -7,7 +7,8 @@ function AddIssue() {
         description: '',
         city: '',
         state: '',
-        zip: null
+        zip: '',
+        creator_id: '',
     })
 
     const handleChanges = (e) => {
@@ -18,12 +19,12 @@ function AddIssue() {
         })
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
         e.preventDefault();
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='addPostForm'>
             <label htmlFor="name">Name</label>
             <input
                 id='name'
@@ -31,6 +32,7 @@ function AddIssue() {
                 onChange={handleChanges}
                 value={formValues.name}
                 required
+                maxLength='128'
             />
             <label htmlFor="description">Description</label>
             <input
@@ -39,6 +41,7 @@ function AddIssue() {
                 onChange={handleChanges}
                 value={formValues.description}
                 required
+                maxLength='1200'
             />
             <label htmlFor="city">City</label>
             <input
@@ -47,6 +50,7 @@ function AddIssue() {
                 onChange={handleChanges}
                 value={formValues.city}
                 required
+                maxLength='20'
             />
             <label htmlFor="state">State</label>
             <input
@@ -55,6 +59,7 @@ function AddIssue() {
                 onChange={handleChanges}
                 value={formValues.state}
                 required
+                maxLength='2'
             />
             <label htmlFor="zip">Zip</label>
             <input
@@ -63,6 +68,7 @@ function AddIssue() {
                 onChange={handleChanges}
                 value={formValues.zip}
                 required
+                maxLength='5'
             />
             <button>Add Issue</button>
         </form>

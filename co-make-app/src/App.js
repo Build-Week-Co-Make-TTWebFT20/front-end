@@ -15,12 +15,12 @@ function App() {
       <Router>
         {/* link the login component here */}
         <Route path='/signup-user'>
-         <UserSignupForm />
+          <UserSignupForm />
         </Route>
         {/* link the login component here */}
         <Route exact path='/' component={Home} />
         {/* link the issues landing page here */}
-        <PrivateRoute exact path='/issues' component={Dashboard} />
+        <PrivateRoute exact path='/posts' component={Dashboard} />
       </Router>
     </div>
   );
