@@ -1,29 +1,33 @@
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './index.css';
+import * as yup from "yup";
+import schema from "./validation/schema";
 import PrivateRoute from './components/PrivateRoute';
-import * as yup from 'yup';
 import UserSignupForm from './components/UserSignupForm';
-import schema from './validation/schema';
+import UserLoginForm from "./components/UserLoginForm";
+import Dashboard from './components/Dashboard';
+import Home from './components/Home';
+
 
 const initialValues = {
-  username: '',
-  password: '',
-  confirmPassword: '',
-  role: '',
+  username: "",
+  password: "",
+  confirmPassword: "",
+  role: "",
 };
 
 const initialErrors = {
-  username: '',
-  password: '',
-  confirmPassword: '',
-  role: '',
+  username: "",
+  password: "",
+  confirmPassword: "",
+  role: "",
 };
 
 const initialDisabled = true;
 
 function App(props) {
-
   const [users, setUsers] = useState([]);
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialErrors);
@@ -35,22 +39,22 @@ function App(props) {
       .validate(value)
       .then(() => {
         setFormErrors({
-          ...formErrors, 
-          [name]: ''
+          ...formErrors,
+          [name]: "",
         });
       })
-      .catch(err => {
+      .catch((err) => {
         setFormErrors({
           ...formErrors,
-          [name]: err.errors[0]
+          [name]: err.errors[0],
         });
       });
-    
-      setFormValues({
-        ...formValues,
-        [name]: value
-      })
-  }
+
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
 
   const submit = () => {
     const newUser = {
@@ -58,34 +62,52 @@ function App(props) {
       password: formValues.password.trim(),
       role: formValues.role,
     };
-    setUsers([ ...users, newUser]);
+    setUsers([...users, newUser]);
     setFormValues(initialValues);
   };
 
   useEffect(() => {
-    schema.isValid(formValues).then(valid => {
+    schema.isValid(formValues).then((valid) => {
       setDisabled(!valid);
     });
-  }, [formValues])
+  }, [formValues]);
+
+function App() {
+
 
   return (
     <div className="App">
       <Router>
         {/* link the login component here */}
-        <Route exact path='/signup-user'>
-         <UserSignupForm
-          values={formValues}
-          change={change}
-          submit={submit}
-          errors={formErrors}
-          disabled={disabled} 
-         />
+
+
+        <Route path="/signup-user">
+          <UserSignupForm
+            values={formValues}
+            change={change}
+            submit={submit}
+            errors={formErrors}
+            disabled={disabled}
+          />
+
         </Route>
-        <Route exact path='/'/>
+        {/* link the login component here */}
+        <Route path="/login">
+          <UserLoginForm
+            values={formValues}
+            change={change}
+            submit={submit}
+            errors={formErrors}
+            disabled={disabled}
+            setDisabled={setDisabled}
+          />
+        </Route>
+        <Route exact path="/" component={Home} />
         {/* link the issues landing page here */}
-        <PrivateRoute exact path='/issues'/>
+
+        <PrivateRoute exact path='/posts' component={Dashboard} />
+
       </Router>
-      <h1>HEY HEY HAY</h1>
     </div>
   );
 }

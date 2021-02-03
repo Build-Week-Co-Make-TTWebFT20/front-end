@@ -10,7 +10,7 @@ export default yup.object().shape({
     password: yup
         .string()
         .required('Please enter a password')
-        .max(20, 'Your password can\'t be longer than 20 characters'),
+        .max(128, 'Your password can\'t be longer than 128 characters'),
     confirmPassword: yup 
         .string()
         .oneOf([yup.ref('password'), null], 'Your passwords must match'),
