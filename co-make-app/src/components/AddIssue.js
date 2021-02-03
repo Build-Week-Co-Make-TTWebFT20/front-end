@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { axiosWithAuth } from '../helpers/axiosWithAuth'
 
-function AddIssue() {
+function AddIssue({ posts, setPost }) {
     const [formValues, setFormValues] = useState({
-        name: '',
+        post_name: '',
         description: '',
         city: '',
-        state: '',
+        abr_state: '',
         zip: '',
-        creator_id: '',
     })
 
     const handleChanges = (e) => {
@@ -21,16 +20,24 @@ function AddIssue() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        axiosWithAuth()
+            .post('https://comake-tt-webft-20.herokuapp.com/api/posts', formValues)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     return (
         <form onSubmit={handleSubmit} className='addPostForm'>
-            <label htmlFor="name">Name</label>
+            <label htmlFor="post_name">Name</label>
             <input
-                id='name'
-                name='name'
+                id='post_name'
+                name='post_name'
                 onChange={handleChanges}
-                value={formValues.name}
+                value={formValues.post_name}
                 required
                 maxLength='128'
             />
@@ -52,12 +59,12 @@ function AddIssue() {
                 required
                 maxLength='20'
             />
-            <label htmlFor="state">State</label>
+            <label htmlFor="abr_state">State</label>
             <input
-                id='state'
-                name='state'
+                id='abr_state'
+                name='abr_state'
                 onChange={handleChanges}
-                value={formValues.state}
+                value={formValues.abr_state}
                 required
                 maxLength='2'
             />

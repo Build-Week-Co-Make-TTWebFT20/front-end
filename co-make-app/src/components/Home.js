@@ -3,12 +3,12 @@
 const Home = () => {
     return (
 			<div id="wrapper">
-
-
 					<header id="header" class="alt style2">
 						<a href="index.html" class="logo"><strong>Co-Make</strong> <span>by tt_webft_20</span></a>
 						<nav>
 							<a href="#menu">Menu</a>
+              <a href="/signup-user">Sign Up</a>
+					    <a href="/login">Login</a>
 						</nav>
 					</header>
 
@@ -86,8 +86,9 @@ const Home = () => {
 						<h1>Co-Make</h1>
 					</header>
 					<div className="content">
-						<p>Ever get frustrated that a problem in your town or neighborhood goes ages without being resolved? You might have road issues (potholes, dangerous areas), overgrown plants, or anything else that makes living where you live a little less pleasant. With Co-make you can make your voice heard on the issues you would like to see resolved in your community.
-								</p>
+						<p>
+							Ever get frustrated that a problem in your town or neighborhood goes ages without being resolved? You might have road issues (potholes, dangerous areas), overgrown plants, or anything else that makes living where you live a little less pleasant. With Co-make you can make your voice heard on the issues you would like to see resolved in your community.
+						</p>
 					</div>
 				</div>
 			</section>
@@ -130,5 +131,5 @@ const Home = () => {
 	)
 }
 
-export default Home 
+export default Home
 
