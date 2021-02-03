@@ -4,6 +4,8 @@ import * as yup from 'yup';
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import schema from '../validation/schema';
+import styled from "styled-components";
+
 
 const initialValues = {
   username: '',
@@ -90,59 +92,82 @@ export default function UserSignupForm() {
     change(name, value)
   };
 
-  return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <h2>Get started with your account</h2>
-      </div>
-      <div>
-        <h4>Your Information</h4>
-        <div>
-          <input
-            type='text'
-            name='username'
-            value={formValues.username}
-            onChange={onChange}
-            placeholder='Username'
-          />
+
+    return (
+      <StyledForm>
+        <div className="errors" style={{ color: "orangered" }}>
           <div>{formErrors.username}</div>
-        </div>
-        <div>
-          <input
-            type='password'
-            name='password'
-            value={formValues.password}
-            onChange={onChange}
-            placeholder='Password'
-          />
           <div>{formErrors.password}</div>
-        </div>
-        <div>
-          <input
-            type='password'
-            name='confirmPassword'
-            value={formValues.confirmPassword}
-            onChange={onChange}
-            placeholder='Confirm Password'
-          />
           <div>{formErrors.confirmPassword}</div>
         </div>
-      </div>
-      <div>
-        <h4>Your Role</h4>
-        <div>
-          <select
-            name='role'
-            value={formValues.role}
-            onChange={onChange}
-          >
-            <option value=''>--------- Select ---------</option>
-            <option value='user'>Private Citizen</option>
-            <option value='official'> Government Official</option>
-          </select>
-        </div>
-        <button disabled={disabled}>Sign Up</button>
-      </div>
-    </form>
-  )
+      <h2>Get started with your account!</h2>
+        <form onSubmit={onSubmit}>
+            <div>
+                <h3>Your Information</h3>
+                <div>
+                  <label>
+                    username:
+                    <input
+                        type='text'
+                        name='username'
+                        value={formValues.username}
+                        onChange={onChange}
+                        placeholder='Username'
+                    />
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    password:
+                    <input
+                        type='password'
+                        name='password'
+                        value={formValues.password}
+                        onChange={onChange}
+                        placeholder='Password'
+                    />
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    confirm password:
+                    <input
+                        type='password'
+                        name='confirmPassword'
+                        value={formValues.confirmPassword}
+                        onChange={onChange}
+                        placeholder='Confirm Password'
+                    />
+                  </label>
+                </div>
+            </div>
+            <div><br></br>
+                <h3>Your Role</h3>
+                <div>
+                    <select
+                        name='role'
+                        value={formValues.role}
+                        onChange={onChange}
+                    >
+                        <option value=''>--------- Select ---------</option>
+                        <option value='user'>Private Citizen</option>
+                        <option value='official'> Government Official</option>
+                    </select>
+                </div><br></br>
+                <button disabled={disabled}>Sign Up</button>
+            </div>
+        </form>
+      </StyledForm>
+    )
 }
+
+const StyledForm = styled.div`
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  margin-top: 5%;
+  &.links {
+    display: flex;
+    flex-direction: column;
+  }
+`;
