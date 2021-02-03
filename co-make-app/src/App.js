@@ -72,9 +72,6 @@ function App(props) {
     });
   }, [formValues]);
 
-function App() {
-
-
   return (
     <div className="App">
       <Router>
