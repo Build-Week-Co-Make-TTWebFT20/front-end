@@ -75,7 +75,7 @@ function App(props) {
   return (
     <div className="App">
       <Router>
-        {/* link the login component here */}
+        {/* link the register component here */}
 
 
         <Route path="/signup-user">
@@ -100,7 +100,7 @@ function App(props) {
           />
         </Route>
         <Route exact path="/" component={Home} />
-        {/* link the issues landing page here */}
+        {/* link the posts landing page here */}
 
         <PrivateRoute exact path='/posts' component={Dashboard} />
 

@@ -34,6 +34,14 @@ export default function UserLogin(props) {
     };
     setUsers([...users, newUser]);
     setFormValues(initialValues);
+    axios
+      .post('https://comake-tt-webft-20.herokuapp.com/api/auth/login', formValues)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   };
 
   const onChange = (evt) => {
@@ -94,7 +102,7 @@ export default function UserLogin(props) {
         </label>
         <div className="links">
           <button disabled={disabled}>login</button>
-          <a href="/signup-user" class="button next">
+          <a href="/signup-user" className="button next">
             Register Now
           </a>
         </div>
