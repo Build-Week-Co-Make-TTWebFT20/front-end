@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { axiosWithAuth } from '../helpers/axiosWithAuth'
 import AddIssue from './AddIssue';
@@ -8,9 +7,10 @@ function Dashboard() {
     const [postsList, setPostsList] = useState([]);
 
     const getPostsList = () => {
-        axios
-            .get('https://comake-tt-webft-20.herokuapp.com/api/posts')
+        axiosWithAuth()
+            .get('/api/posts')
             .then((res) => {
+                console.log(res);
                 setPostsList(res.data);
             })
             .catch((err) => {
@@ -31,3 +31,4 @@ function Dashboard() {
 }
 
 export default Dashboard
+
