@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import * as yup from "yup";
-
+import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import schemaLogin from "../validation/schemaLogin";
-
-// const { push } = useHistory();
 
 const initialValues = {
   username: "",
@@ -24,6 +22,7 @@ export default function UserLogin(props) {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
+  const { push } = useHistory();
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -37,7 +36,8 @@ export default function UserLogin(props) {
     axios
       .post('https://comake-tt-webft-20.herokuapp.com/api/auth/login', formValues)
       .then((res) => {
-        console.log(res);
+        localStorage.setItem('token', res.data.token);
+        push('/posts');
       })
       .catch((err) => {
         console.log(err);
