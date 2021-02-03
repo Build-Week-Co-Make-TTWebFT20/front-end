@@ -6,11 +6,11 @@ const Home = () => {
 
 
 					<header id="header" class="alt style2">
-						<a href="index.html" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
+						<a href="index.html" class="logo"><strong>Co-Make</strong> <span>by tt_webft_20</span></a>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
-					
+					</header>
 
 				
 					<nav id="menu">
@@ -25,20 +25,21 @@ const Home = () => {
 							<li><a href="/login" class="button fit">Log In</a></li>
 						</ul>
 					</nav>
-                    </header>
+                    
 
 
-					<section id="banner" class="style2">
+					<section id="banner" class="major">
 						<div class="inner">
-							<span class="image">
-								<img src="images/pic07.jpg" alt="" />
-							</span>
 							<header class="major">
-								<h1>Co-Make</h1>
+								<h1>Hi, we're Co-Make.</h1>
 							</header>
 							<div class="content">
-								<p>Ever get frustrated that a problem in your town or neighborhood goes ages without being resolved? You might have road issues (potholes, dangerous areas), overgrown plants, or anything else that makes living where you live a little less pleasant. With Co-make you can make your voice heard on the issues you would like to see resolved in your community. 
-								</p>
+								<p>Ever get frustrated that a problem in your town or neighborhood goes ages without being resolved? You might have road issues (potholes, dangerous areas), overgrown plants, or anything else that makes living where you live a little less pleasant. With Co-make you can make your voice heard on the issues you would like to see resolved in your community.</p>
+								<ul class="actions">
+									<li><a href="/signup-user" class="button next scrolly">Get Started</a>
+
+									</li>
+								</ul>
 							</div>
 						</div>
 					</section>
@@ -54,7 +55,7 @@ const Home = () => {
 									</header>
 									<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet pharetra et feugiat tempus.</p>
 									<ul class="actions">
-										<li><a href="/signup-user" class="button next">Get Started</a></li>
+										<li><a href="/login" class="button next">Login</a></li>
 									</ul>
 								</div>
 							</section>
