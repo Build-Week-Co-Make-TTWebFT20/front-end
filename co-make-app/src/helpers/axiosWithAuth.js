@@ -7,7 +7,7 @@ export const axiosWithAuth = () => {
 
     // create the axios req with the base URL
     return axios.create({
-        baseURL: 'http://localhost:5000/api',
+        baseURL: 'https://comake-tt-webft-20.herokuapp.com/',
         // pass in the token as the auth key in the header
         headers: {
             authorization: token

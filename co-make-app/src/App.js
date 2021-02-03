@@ -1,14 +1,14 @@
+
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import './index.css';
 import * as yup from "yup";
 import schema from "./validation/schema";
-import "./index.css";
-
-import PrivateRoute from "./components/PrivateRoute";
-import UserSignupForm from "./components/UserSignupForm";
+import PrivateRoute from './components/PrivateRoute';
+import UserSignupForm from './components/UserSignupForm';
 import UserLoginForm from "./components/UserLoginForm";
-import Dashboard from "./components/Dashboard";
-import Home from "./components/Home";
+import Dashboard from './components/Dashboard';
+import Home from './components/Home';
 
 const initialValues = {
   username: "",
@@ -71,10 +71,14 @@ function App(props) {
     });
   }, [formValues]);
 
+function App() {
+
+
   return (
     <div className="App">
       <Router>
         {/* link the login component here */}
+
         <Route path="/signup-user">
           <UserSignupForm
             values={formValues}
@@ -83,6 +87,7 @@ function App(props) {
             errors={formErrors}
             disabled={disabled}
           />
+
         </Route>
         {/* link the login component here */}
         <Route path="/login">
@@ -97,7 +102,9 @@ function App(props) {
         </Route>
         <Route exact path="/" component={Home} />
         {/* link the issues landing page here */}
-        <PrivateRoute exact path="/issues" component={Dashboard} />
+
+        <PrivateRoute exact path='/posts' component={Dashboard} />
+
       </Router>
     </div>
   );
