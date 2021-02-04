@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { axiosWithAuth } from '../helpers/axiosWithAuth'
 import { useHistory } from 'react-router-dom';
 
+
 function PostCard(props) {
-    const { post_name, description, city, abr_state, zip, score, id } = props.post;
+    const { post_name, description, city, abr_state, zip, score, id, user_direction } = props.post;
     const [scoreValue, setScoreValue] = useState(score);
     const { push } = useHistory();
+
+    useEffect(() => {
+
+    }, [])
 
     const deletePost = ((e) => {
         e.preventDefault();
@@ -13,6 +18,28 @@ function PostCard(props) {
             .delete(`https://comake-tt-webft-20.herokuapp.com/api/posts/${id}`)
             .then((res) => {
                 console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    })
+
+    const votingUp = (() => {
+        axiosWithAuth()
+            .post(`https://comake-tt-webft-20.herokuapp.com/api/votes/${id}`)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    })
+
+    const votingDown = (() => {
+        axiosWithAuth()
+            .post(`https://comake-tt-webft-20.herokuapp.com/api/votes/${id}`)
+            .then((res) => {
+                console.log(res);
             })
             .catch((err) => {
                 console.log(err);
@@ -32,9 +59,9 @@ function PostCard(props) {
                 <h4>Zip : {zip}</h4>
             </div>
             <div>
-                <p onClick={() => setScoreValue(scoreValue + 1)}>+</p>
-                <p>{score}</p>
-                <p onClick={() => setScoreValue(scoreValue - 1)}>-</p>
+                <button onClick={votingUp}>+</button>
+                <div>{score}</div>
+                <button onClick={votingDown}>-</button>
             </div>
             <div>
                 <button onClick={() => push(`/api/posts/${id}`)} >Edit</button>
