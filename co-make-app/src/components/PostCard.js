@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 function PostCard(props) {
     const { post_name, description, city, abr_state, zip, score } = props.post;
@@ -18,6 +18,10 @@ function PostCard(props) {
                 <p>+</p>
                 <p>{score}</p>
                 <p>-</p>
+            </div>
+            <div>
+                <button>Edit</button>
+                <button>Delete</button>
             </div>
         </div>
     )

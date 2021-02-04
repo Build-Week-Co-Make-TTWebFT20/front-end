@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { axiosWithAuth } from '../helpers/axiosWithAuth'
-import AddIssue from './AddIssue';
+import AddPost from './AddPost';
 import PostsList from './PostsList';
 
 function Dashboard() {
@@ -10,7 +10,6 @@ function Dashboard() {
         axiosWithAuth()
             .get('/api/posts')
             .then((res) => {
-                console.log(res);
                 setPostsList(res.data);
             })
             .catch((err) => {
@@ -24,7 +23,7 @@ function Dashboard() {
 
     return (
         <div>
-            <AddIssue posts={postsList} setPost={setPostsList} />
+            <AddPost posts={postsList} setPostsList={setPostsList} getPostsList={getPostsList} />
             <PostsList posts={postsList} />
         </div>
     )

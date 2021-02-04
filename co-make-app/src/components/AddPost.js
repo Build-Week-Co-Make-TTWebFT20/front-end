@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { axiosWithAuth } from '../helpers/axiosWithAuth'
 
-function AddIssue({ posts, setPost }) {
-    const [formValues, setFormValues] = useState({
-        post_name: '',
-        description: '',
-        city: '',
-        abr_state: '',
-        zip: '',
-    })
+const initialValues = {
+    post_name: '',
+    description: '',
+    city: '',
+    abr_state: '',
+    zip: '',
+}
+
+function AddPost({ posts, setPostsList, getPostsList }) {
+    const [formValues, setFormValues] = useState(initialValues)
 
     const handleChanges = (e) => {
         const { name, value } = e.target;
@@ -18,16 +20,22 @@ function AddIssue({ posts, setPost }) {
         })
     }
 
+    useEffect(() => {
+        getPostsList()
+    }, [getPostsList])
+
     const handleSubmit = (e) => {
         e.preventDefault();
         axiosWithAuth()
             .post('https://comake-tt-webft-20.herokuapp.com/api/posts', formValues)
             .then((res) => {
-                console.log(res);
+                posts.push(res.data)
+                setPostsList(posts)
             })
             .catch((err) => {
                 console.log(err);
             })
+        setFormValues(initialValues);
     }
 
     return (
@@ -82,6 +90,6 @@ function AddIssue({ posts, setPost }) {
     )
 }
 
-export default AddIssue;
+export default AddPost;
 
 
