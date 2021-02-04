@@ -4,8 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 
 function PostCard(props) {
-    const { post_name, description, city, abr_state, zip, score, id, user_direction } = props.post;
-    const [scoreValue, setScoreValue] = useState(score);
+    const { post_name, description, city, abr_state, zip, score, id } = props.post;
     const { push } = useHistory();
 
     useEffect(() => {
@@ -25,8 +24,9 @@ function PostCard(props) {
     })
 
     const votingUp = (() => {
+        const up = { direction: 1 }
         axiosWithAuth()
-            .post(`https://comake-tt-webft-20.herokuapp.com/api/votes/${id}`)
+            .post(`https://comake-tt-webft-20.herokuapp.com/api/votes/${id}`, up)
             .then((res) => {
                 console.log(res);
             })
@@ -36,8 +36,9 @@ function PostCard(props) {
     })
 
     const votingDown = (() => {
+        const down = { direction: -1 }
         axiosWithAuth()
-            .post(`https://comake-tt-webft-20.herokuapp.com/api/votes/${id}`)
+            .post(`https://comake-tt-webft-20.herokuapp.com/api/votes/${id}`, down)
             .then((res) => {
                 console.log(res);
             })
