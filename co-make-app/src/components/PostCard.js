@@ -1,7 +1,23 @@
 import React from 'react'
+import { axiosWithAuth } from '../helpers/axiosWithAuth'
+import { useHistory } from 'react-router-dom';
 
 function PostCard(props) {
-    const { post_name, description, city, abr_state, zip, score } = props.post;
+    const { post_name, description, city, abr_state, zip, score, id } = props.post;
+    const { push } = useHistory();
+
+    const deletePost = ((e) => {
+        e.preventDefault();
+        axiosWithAuth()
+            .delete(`https://comake-tt-webft-20.herokuapp.com/api/posts/${id}`)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    })
+
     return (
         <div className='post-card'>
             <h2>{post_name}</h2>
@@ -20,8 +36,8 @@ function PostCard(props) {
                 <p>-</p>
             </div>
             <div>
-                <button>Edit</button>
-                <button>Delete</button>
+                <button onClick={() => push(`/api/posts/${id}`)} >Edit</button>
+                <button onClick={deletePost}>Delete</button>
             </div>
         </div>
     )
