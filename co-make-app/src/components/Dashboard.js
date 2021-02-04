@@ -24,7 +24,7 @@ function Dashboard() {
     return (
         <div>
             <AddPost posts={postsList} setPostsList={setPostsList} getPostsList={getPostsList} />
-            <PostsList posts={postsList} />
+            <PostsList posts={postsList} setPostsList={setPostsList} />
         </div>
     )
 }

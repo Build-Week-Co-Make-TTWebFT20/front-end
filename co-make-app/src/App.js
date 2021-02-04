@@ -9,7 +9,7 @@ import UserSignupForm from './components/UserSignupForm';
 import UserLoginForm from "./components/UserLoginForm";
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
-
+import EditPostForm from './components/EditPostForm';
 
 const initialValues = {
   username: "",
@@ -32,6 +32,7 @@ function App(props) {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
+
 
   const change = (name, value) => {
     yup
@@ -103,6 +104,7 @@ function App(props) {
         {/* link the posts landing page here */}
 
         <PrivateRoute exact path='/posts' component={Dashboard} />
+        <PrivateRoute exact path='/api/posts/:id' component={EditPostForm} />
 
       </Router>
     </div>
