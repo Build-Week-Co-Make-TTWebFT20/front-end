@@ -24,11 +24,7 @@ function PostCard(props) {
     })
 
     const votingUp = (() => {
-<<<<<<< HEAD:src/components/PostCard.js
-        const up = {direction: 1};
-=======
         const up = { direction: 1 }
->>>>>>> 9ab74a68298519e845c7462b59f07bb47a9df2aa:co-make-app/src/components/PostCard.js
         axiosWithAuth()
             .post(`https://comake-tt-webft-20.herokuapp.com/api/votes/${id}`, up)
             .then((res) => {
@@ -40,11 +36,7 @@ function PostCard(props) {
     })
 
     const votingDown = (() => {
-<<<<<<< HEAD:src/components/PostCard.js
         const down = {direction: -1};
-=======
-        const down = { direction: -1 }
->>>>>>> 9ab74a68298519e845c7462b59f07bb47a9df2aa:co-make-app/src/components/PostCard.js
         axiosWithAuth()
             .post(`https://comake-tt-webft-20.herokuapp.com/api/votes/${id}`, down)
             .then((res) => {
