@@ -25,8 +25,9 @@ function PostCard(props) {
     })
 
     const votingUp = (() => {
+        const up = {direction: 1};
         axiosWithAuth()
-            .post(`https://comake-tt-webft-20.herokuapp.com/api/votes/${id}`)
+            .post(`https://comake-tt-webft-20.herokuapp.com/api/votes/${id}`, up)
             .then((res) => {
                 console.log(res);
             })
@@ -36,8 +37,9 @@ function PostCard(props) {
     })
 
     const votingDown = (() => {
+        const down = {direction: -1};
         axiosWithAuth()
-            .post(`https://comake-tt-webft-20.herokuapp.com/api/votes/${id}`)
+            .post(`https://comake-tt-webft-20.herokuapp.com/api/votes/${id}`, down)
             .then((res) => {
                 console.log(res);
             })
